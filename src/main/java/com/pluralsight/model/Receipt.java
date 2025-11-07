@@ -1,0 +1,6 @@
+package com.pluralsight.model;
+
+public class Receipt {
+
+
+}
