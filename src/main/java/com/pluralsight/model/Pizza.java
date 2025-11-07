@@ -1,21 +1,19 @@
 package com.pluralsight.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Pizza {
+public class Pizza extends MenuItem {
 
     private String crust;
-    private int quantity;
     private int size;
-    private double price;
-    private ArrayList<Pizza> pizzaArrayList;
+    private List<Topping> toppings;
 
-    public Pizza(String crust, int quantity, int size, double price, ArrayList<Pizza> pizzaArrayList) {
+    public Pizza(double price, int quantity, String description, String crust, int size, List<Topping> toppings) {
+        super(price, quantity, description);
         this.crust = crust;
-        this.quantity = quantity;
         this.size = size;
-        this.price = price;
-        this.pizzaArrayList = pizzaArrayList;
+        this.toppings = toppings;
     }
 
     public String getCrust() {
@@ -26,14 +24,6 @@ public class Pizza {
         this.crust = crust;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public int getSize() {
         return size;
     }
@@ -42,21 +32,11 @@ public class Pizza {
         this.size = size;
     }
 
-    public double getPrice() {
-        return price;
+    public List<Topping> getToppings() {
+        return toppings;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
     }
-
-    public ArrayList<Pizza> getPizzaArrayList() {
-        return pizzaArrayList;
-    }
-
-    public void setPizzaArrayList(ArrayList<Pizza> pizzaArrayList) {
-        this.pizzaArrayList = pizzaArrayList;
-    }
-
-
 }

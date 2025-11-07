@@ -5,14 +5,17 @@ public class Topping {
     private String toppingName;
     private String toppingType;
     private boolean isExtra;
+    private boolean isIncluded;
     private double price;
 
 
-    public Topping(String toppingName, String toppingType, boolean isExtra, double price) {
+    public Topping(String toppingName, String toppingType, boolean isExtra, boolean isIncluded, double price) {
         this.toppingName = toppingName;
         this.toppingType = toppingType;
         this.isExtra = isExtra;
+        this.isIncluded = isIncluded;
         this.price = price;
+
     }
 
     public String getToppingName() {
@@ -35,8 +38,8 @@ public class Topping {
         return isExtra;
     }
 
-    public void setExtra(boolean extra) {
-        isExtra = extra;
+    public boolean isIncluded() {
+        return isIncluded;
     }
 
     public double getPrice() {

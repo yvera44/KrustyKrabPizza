@@ -1,10 +1,15 @@
 package com.pluralsight.model;
 
-public class Drink {
+public class Drink extends MenuItem {
 
     private String size;
-    private int quantity;
-    private double price;
 
-
+    public Drink(double price, int quantity, String description, String size) {
+        super(price, quantity, description);
+        this.size = size;
+    }
 }
+
+
+
+
