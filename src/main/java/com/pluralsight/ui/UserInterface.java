@@ -1,12 +1,17 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.model.Topping;
+
+import javax.imageio.stream.ImageOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-    private static Scanner scanner = new Scanner(System.in);
+    private Scanner scanner = new Scanner(System.in);
 
     // Main menu loop
-    public static void runMainMenu() {
+    public void runMainMenu() {
         boolean running = true;
         System.out.println("WELCOME TO THE KRUSTY KRAB PIZZA PARLOR ");
 
@@ -32,7 +37,7 @@ public class UserInterface {
         }
     }
 
-    private static void displayMenu() {
+    private void displayMenu() {
         System.out.println("""
                 ========= Main Menu ======
                 (1) New Order
@@ -40,7 +45,7 @@ public class UserInterface {
 
     }
 
-    public static void runOrderMenu() {
+    public void runOrderMenu() {
         boolean running = true;
 
         while (running) {
@@ -50,7 +55,7 @@ public class UserInterface {
 
             switch (choice) {
                 case "1":
-                    runPizzaBuilder();
+                    runPizzaMenu();
                     break;
                 case "2":
                     runDrinkMenu();
@@ -69,7 +74,7 @@ public class UserInterface {
         }
     }
 
-    private static void displayItemMenu() {
+    private void displayItemMenu() {
         System.out.println("""
                 ========= Order Menu ======
                 (1) Add Pizza
@@ -77,6 +82,11 @@ public class UserInterface {
                 (3) Add Garlic Knots
                 (4) Checkout
                 (5) Cancel Order""");
+    }
+
+
+    public void runPizzaMenu() {
+        boolean running = true;
 
         while (running) {
             displayMenu();
@@ -84,8 +94,7 @@ public class UserInterface {
             String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
             switch (choice) {
-                case "1":
-                    runOrderMenu();
+                case "Thin", "Regular", "Thick", "Cauliflower":
                     break;
                 case "0":
                     System.out.println("Exiting.... Goodbye!");
@@ -100,18 +109,123 @@ public class UserInterface {
         }
     }
 
+    public List<Topping> loadRegularToppings(){
+        List<Topping> regularToppings = new ArrayList<>();
 
-        // showOrderMenu:
-        //   - print:
-        //       1) Add Sandwich
-        //       2) Add Drink
-        //       3) Add Chips
-        //       4) Checkout
-        //       0) Cancel Order
-        //   - prompt user for choice
-        //   - return user input
+        Topping onions = new Topping("Onions", "Vegetable", false, 0);
+        regularToppings.add(onions);
 
-        // promptForBreadType:
+        Topping mushrooms = new Topping("Mushrooms", "Vegetable", false, 0);
+        regularToppings.add(mushrooms);
+
+        Topping bellPeppers = new Topping("Bell Peppers", "Vegetable", false, 0);
+        regularToppings.add(bellPeppers);
+
+        Topping olives = new Topping("Olives", "Vegetable", false, 0);
+        regularToppings.add(olives);
+
+        Topping tomatoes = new Topping("Tomatoes", "Fruit", false, 0);
+        regularToppings.add(tomatoes);
+
+        Topping spinach = new Topping("Spinach", "Vegetable", false, 0);
+        regularToppings.add(spinach);
+
+        Topping basil = new Topping("Basil", "Vegetable", false, 0);
+        regularToppings.add(basil);
+
+        Topping pineapple = new Topping("Pineapple", "Fruit", false, 0);
+        regularToppings.add(pineapple);
+
+        Topping anchovies = new Topping("Anchovies", "Meat", false, 0);
+        regularToppings.add(anchovies);
+
+        return regularToppings;
+    }
+
+    public List<Topping> loadMeatToppings(){
+        List<Topping> meatToppings = new ArrayList<>();
+
+        Topping pepperoni = new Topping("Pepperoni", "Meat", false, 1.00);
+        meatToppings.add(pepperoni);
+
+        Topping sausage = new Topping("Sausage", "Meat", false, 1.00);
+        meatToppings.add(pepperoni);
+
+        Topping ham = new Topping("Ham", "Meat", false, 1.00);
+        meatToppings.add(ham);
+
+        Topping bacon = new Topping("Bacon", "Meat", false, 1.00);
+        meatToppings.add(bacon);
+
+        Topping chicken = new Topping("Chicken", "Meat", false, 1.00);
+        meatToppings.add(chicken);
+
+        Topping meatball = new Topping("Meatball", "Meat", false, 1.00);
+        meatToppings.add(meatball);
+
+        return meatToppings;
+    }
+
+    public List<Topping> loadCheeseToppings(){
+        List<Topping> cheeseToppings = new ArrayList<>();
+
+        Topping mozzarella = new Topping("Mozzarella", "Cheese", false, 0.75);
+        cheeseToppings.add(mozzarella);
+
+        Topping parmesan = new Topping("Parmesan", "Cheese", false, 0.75);
+        cheeseToppings.add(parmesan);
+
+        Topping ricotta = new Topping("Ricotta", "Cheese", false, 0.75);
+        cheeseToppings.add(ricotta);
+
+        Topping goatCheese = new Topping("Goat Cheese", "Cheese", false, 0.75);
+        cheeseToppings.add(goatCheese);
+
+        Topping buffaloCheese = new Topping("Buffalo Cheese", "Cheese", false, 0.75);
+        cheeseToppings.add(buffaloCheese);
+
+        return cheeseToppings;
+    }
+
+    public List<Topping> loadSauceToppings(){
+        List<Topping> sauceToppings = new ArrayList<>();
+
+        Topping marinara = new Topping("Marinara", "Sauce", false, 0);
+        sauceToppings.add(marinara);
+
+        Topping alfredo = new Topping("Alfredo", "Sauce", false, 0);
+        sauceToppings.add(alfredo);
+
+        Topping pesto = new Topping("Pesto", "Sauce", false, 0);
+        sauceToppings.add(pesto);
+
+        Topping bbq = new Topping("BBQ", "Sauce", false, 0);
+        sauceToppings.add(bbq);
+
+        Topping buffalo = new Topping("Buffalo", "Sauce", false, 0);
+        sauceToppings.add(buffalo);
+
+        Topping oliveOil = new Topping("Olive Oil", "Sauce", false, 0);
+        sauceToppings.add(oliveOil);
+
+        return sauceToppings;
+    }
+
+    public List<Topping> loadSidesToppings() {
+        List<Topping> sidesToppings = new ArrayList<>();
+
+        Topping redPepper = new Topping("Red Pepper", "Side", false, 0);
+        sidesToppings.add(redPepper);
+
+        Topping parmesan = new Topping("Parmesan", "Side", false, 0);
+        sidesToppings.add(parmesan);
+
+        return sidesToppings;
+    }
+
+
+
+    // promptForBreadType:
         //   - print list of bread types
         //   - ask user to type one in (e.g., "white")
         //   - return as user input

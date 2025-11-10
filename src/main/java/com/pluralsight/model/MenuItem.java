@@ -1,6 +1,6 @@
 package com.pluralsight.model;
 
-public class MenuItem {
+public abstract class MenuItem {
 
     private String description;
     private double price;
@@ -10,6 +10,9 @@ public class MenuItem {
         this.price = price;
         this.quantity = quantity;
     }
+
+
+
 
     public double getPrice() {
         return price;

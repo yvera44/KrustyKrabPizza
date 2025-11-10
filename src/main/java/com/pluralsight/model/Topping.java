@@ -1,20 +1,21 @@
 package com.pluralsight.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Topping {
 
     private String toppingName;
     private String toppingType;
     private boolean isExtra;
-    private boolean isIncluded;
-    private double price;
+    private double basePrice;
 
 
-    public Topping(String toppingName, String toppingType, boolean isExtra, boolean isIncluded, double price) {
+    public Topping(String toppingName, String toppingType, boolean isExtra, double basePrice) {
         this.toppingName = toppingName;
         this.toppingType = toppingType;
         this.isExtra = isExtra;
-        this.isIncluded = isIncluded;
-        this.price = price;
+        this.basePrice = basePrice;
 
     }
 
@@ -38,16 +39,12 @@ public class Topping {
         return isExtra;
     }
 
-    public boolean isIncluded() {
-        return isIncluded;
+    public double getBasePrice() {
+        return basePrice;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
     }
 
 
