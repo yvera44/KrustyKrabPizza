@@ -1,15 +1,15 @@
 package com.pluralsight;
 
+import com.pluralsight.ui.UserInterface;
 import java.util.Scanner;
-
-import static com.pluralsight.ui.UserInterface.runMainMenu;
 
 public class Application {
     public static void main(String[] args) {
-         Scanner scanner = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
 
-        runMainMenu();
-        scanner.close();
+            UserInterface userInterface = new UserInterface();
+            userInterface.runMainMenu();
 
+            scanner.close();
+        }
     }
-}

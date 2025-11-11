@@ -2,7 +2,6 @@ package com.pluralsight.ui;
 
 import com.pluralsight.model.Topping;
 
-import javax.imageio.stream.ImageOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -58,13 +57,13 @@ public class UserInterface {
                     runPizzaMenu();
                     break;
                 case "2":
-                    runDrinkMenu();
+                    //runDrinkMenu();
                     break;
                 case "3":
                     System.out.print("How many garlic knots would you like? ");
                     break;
                 case "4":
-                    runCheckoutMenu();
+                    //runCheckoutMenu();
                     break;
                 case "5":
                     System.out.println("Canceling order...");
@@ -89,27 +88,128 @@ public class UserInterface {
         boolean running = true;
 
         while (running) {
-            displayMenu();
-            System.out.print("Choose and option: ");
+            displayCrustMenu();
+            System.out.print("Choose your crust: ");
             String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
             switch (choice) {
-                case "Thin", "Regular", "Thick", "Cauliflower":
+                case "1":
+                    System.out.println("Regular");
+                    runPizzaSize();
                     break;
-                case "0":
-                    System.out.println("Exiting.... Goodbye!");
-                    running = false;
+                case "2":
+                    System.out.println("Thin");
+                    runPizzaSize();
+                    break;
+                case "3":
+                    System.out.println("Thick");
+                    runPizzaSize();
+                    break;
+                case "4":
+                    System.out.println("Cauliflower");
+                    runPizzaSize();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-
             System.out.println(); // blank line for spacing
-
         }
     }
 
-    public List<Topping> loadRegularToppings(){
+    private void displayCrustMenu() {
+        System.out.println("""
+                ========= Crust Types ======
+                (1) Thin
+                (2) Regular
+                (3) Thick
+                (4) Cauliflower""");
+    }
+
+
+    public void runPizzaSize() {
+        boolean running = true;
+
+        while (running) {
+            displayPizzaSizes();
+            System.out.print("Choose your pizza size: ");
+            String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
+
+            switch (choice) {
+                case "S":
+                    System.out.println("8 inch");
+                    runToppingsMenu();
+                    break;
+                case "M":
+                    System.out.println("12 inch");
+                    runToppingsMenu();
+                    break;
+                case "L":
+                    System.out.println("16 inch");
+                    runToppingsMenu();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+            System.out.println(); // blank line for spacing
+        }
+    }
+
+    private void displayPizzaSizes() {
+        System.out.println("""
+                ========= Pizza Sizes ======
+                (S) 8 inch
+                (M) 12 inch
+                (L) 16 inch""");
+    }
+
+    public void runToppingsMenu() {
+        boolean running = true;
+
+        while (running) {
+            displayToppingsMenu();
+            System.out.print("Choose and option: ");
+            String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
+
+            switch (choice) {
+                case "1":
+                    System.out.println("Regular Toppings");
+                    runPizzaSize();
+                    break;
+                case "2":
+                    System.out.println("Meat Toppings");
+                    runPizzaSize();
+                    break;
+                case "3":
+                    System.out.println("Cheeses");
+                    runPizzaSize();
+                    break;
+                case "4":
+                    System.out.println("Sauces");
+                    runPizzaSize();
+                    break;
+                case "5":
+                    System.out.println("Extras");
+                    runPizzaSize();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+            System.out.println(); // blank line for spacing
+        }
+    }
+    private void displayToppingsMenu() {
+        System.out.println("""
+                ========= Toppings ======
+                (R) Regular Toppings
+                (M) Meats
+                (C) Cheeses
+                (S) Sauces
+                (E) Extras""");
+    }
+
+
+
+    public List<Topping> loadRegularToppings() {
         List<Topping> regularToppings = new ArrayList<>();
 
         Topping onions = new Topping("Onions", "Vegetable", false, 0);
@@ -142,14 +242,14 @@ public class UserInterface {
         return regularToppings;
     }
 
-    public List<Topping> loadMeatToppings(){
+    public List<Topping> loadMeatToppings() {
         List<Topping> meatToppings = new ArrayList<>();
 
         Topping pepperoni = new Topping("Pepperoni", "Meat", false, 1.00);
         meatToppings.add(pepperoni);
 
         Topping sausage = new Topping("Sausage", "Meat", false, 1.00);
-        meatToppings.add(pepperoni);
+        meatToppings.add(sausage);
 
         Topping ham = new Topping("Ham", "Meat", false, 1.00);
         meatToppings.add(ham);
@@ -166,7 +266,7 @@ public class UserInterface {
         return meatToppings;
     }
 
-    public List<Topping> loadCheeseToppings(){
+    public List<Topping> loadCheeseToppings() {
         List<Topping> cheeseToppings = new ArrayList<>();
 
         Topping mozzarella = new Topping("Mozzarella", "Cheese", false, 0.75);
@@ -187,7 +287,7 @@ public class UserInterface {
         return cheeseToppings;
     }
 
-    public List<Topping> loadSauceToppings(){
+    public List<Topping> loadSauceToppings() {
         List<Topping> sauceToppings = new ArrayList<>();
 
         Topping marinara = new Topping("Marinara", "Sauce", false, 0);
@@ -223,28 +323,4 @@ public class UserInterface {
         return sidesToppings;
     }
 
-
-
-    // promptForBreadType:
-        //   - print list of bread types
-        //   - ask user to type one in (e.g., "white")
-        //   - return as user input
-
-        // promptForSize:
-        //   - ask user: "What size? (4, 8, or 12 inches)"
-        //   - return user input
-
-        // promptForToasted:
-        //   - ask: "Would you like it toasted? (yes or no)"
-        //   - return user input
-
-        // promptForMeats:
-        //   - possible loop (one or multiple meats?):
-        //       - ask user to type of meat (or 'done' to finish)
-        //       - ask if they want Extra meat? (yes or no)"
-        //   - return list of meats and extras
-
-        // and so on and so on........
-
-    }
 }
