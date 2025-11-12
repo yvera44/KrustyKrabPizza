@@ -9,7 +9,7 @@ public class Pizza extends MenuItem {
     private int size;
     private List<Topping> toppings;
 
-    public Pizza() {
+    public Pizza(String crust,int size) {
         super(0.0, 0, "Pizza");
         this.crust = "";
         this.size = 0;

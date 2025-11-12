@@ -87,37 +87,30 @@ public class UserInterface {
 
 
     public void runPizzaMenu() {
-        boolean running = true;
-
-        while (running) {
             displayCrustMenu();
-            Pizza pizza = new Pizza();
             System.out.print("Choose your crust: ");
             String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
+            String crust = "";
             switch (choice) {
                 case "1":
-                    System.out.println("Regular");
-                    runPizzaSize();
+                    crust = "Regular";
                     break;
                 case "2":
-                    System.out.println("Thin");
-                    runPizzaSize();
+                    crust = "Thin";
                     break;
                 case "3":
-                    System.out.println("Thick");
-                    runPizzaSize();
+                    crust = "Think";
                     break;
                 case "4":
-                    System.out.println("Cauliflower");
-                    runPizzaSize();
+                    crust = "Cauliflower";
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-            System.out.println(); // blank line for spacing
+            System.out.println("You selected: " + crust + " crust"); // blank line for spacing
+            runPizzaSize(crust);
         }
-    }
 
     private void displayCrustMenu() {
         System.out.println("""
@@ -128,33 +121,33 @@ public class UserInterface {
                 (4) Cauliflower""");
     }
 
+    public void runPizzaSize(String crust) {
 
-    public void runPizzaSize() {
-        boolean running = true;
-
-        while (running) {
             displayPizzaSizes();
             System.out.print("Choose your pizza size: ");
-            String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
+            String choice = scanner.nextLine().trim().toUpperCase();
 
+            int size = 0;// normalize input
             switch (choice) {
                 case "S":
+                    size = 8;
                     System.out.println("8 inch");
-                    runToppingsMenu();
                     break;
                 case "M":
+                    size = 12;
                     System.out.println("12 inch");
-                    runToppingsMenu();
                     break;
                 case "L":
+                    size = 16;
                     System.out.println("16 inch");
-                    runToppingsMenu();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-            System.out.println(); // blank line for spacing
-        }
+            System.out.println();
+            Pizza pizza = new Pizza(crust, size);
+
+            runToppingsMenu(pizza);
     }
 
     private void displayPizzaSizes() {
@@ -165,34 +158,29 @@ public class UserInterface {
                 (L) 16 inch""");
     }
 
-    public void runToppingsMenu() {
+    public void runToppingsMenu(Pizza pizza) {
         boolean running = true;
 
         while (running) {
             displayToppingsMenu();
-            System.out.print("Choose and option: ");
+            System.out.print("Choose your topping(s): ");
             String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
             switch (choice) {
                 case "1":
-                    System.out.println("Regular Toppings");
-                    runPizzaSize();
+                    selectFromToppingList(pizza, loadRegularToppings(), "Regular Toppings");
                     break;
                 case "2":
-                    System.out.println("Meat Toppings");
-                    runPizzaSize();
+                    selectFromToppingList(pizza, loadMeatToppings(), "Meat Toppings");
                     break;
                 case "3":
-                    System.out.println("Cheeses");
-                    runPizzaSize();
+                    selectFromToppingList(pizza, loadCheeseToppings(), "Cheese Toppings");
                     break;
                 case "4":
-                    System.out.println("Sauces");
-                    runPizzaSize();
+                    selectFromToppingList(pizza, loadSauceToppings(), "Sauce Toppings");
                     break;
                 case "5":
-                    System.out.println("Extras");
-                    runPizzaSize();
+                    selectFromToppingList(pizza, loadSidesToppings(), "Extras");
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -209,10 +197,31 @@ public class UserInterface {
                 (S) Sauces
                 (E) Extras""");
     }
-    public void runDrinkMenu() {
-        boolean running = true;
 
-        while (running) {
+    private void selectFromToppingList(Pizza pizza, List<Topping> toppings, String catergory){
+        System.out.println("=========== " + catergory + " ===========");
+
+        int index = 1;
+        for (Topping topping : toppings){
+            System.out.println(index + topping.getToppingName() + " - $" + topping.getBasePrice());
+            index++;
+        }
+        System.out.println("Choose a topping or 0 to go back: ");
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    public void runDrinkMenu() {
+
             displayDrinkMenu();
             System.out.println("Choose Order Items: ");
             String choice = scanner.nextLine().trim().toUpperCase();
@@ -222,10 +231,9 @@ public class UserInterface {
                     break;
                 case "X":
                     System.out.println("Returning to Order Menu....");
-                    running = false;
+                    runOrderMenu();
                     break;
             }
-        }
     }
 
     private void displayDrinkMenu() {
