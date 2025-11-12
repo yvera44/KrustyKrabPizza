@@ -11,9 +11,6 @@ public abstract class MenuItem {
         this.quantity = quantity;
     }
 
-
-
-
     public double getPrice() {
         return price;
     }

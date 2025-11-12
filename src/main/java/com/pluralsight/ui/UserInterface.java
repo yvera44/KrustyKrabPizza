@@ -1,7 +1,6 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.model.Topping;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,11 +23,11 @@ public class UserInterface {
                     runOrderMenu();
                     break;
                 case "0":
-                    System.out.println("Exiting.... Goodbye!");
+                    System.out.println("Exiting... Uhm maybe order something next time!?");
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Wrong! Its either 1 or 0, we literally could not have made this any easier. ");
             }
 
             System.out.println(); // blank line for spacing
@@ -40,7 +39,7 @@ public class UserInterface {
         System.out.println("""
                 ========= Main Menu ======
                 (1) New Order
-                (0) Exit Menu """);
+                (0) Exit Menu""");
 
     }
 
@@ -57,7 +56,7 @@ public class UserInterface {
                     runPizzaMenu();
                     break;
                 case "2":
-                    //runDrinkMenu();
+                    runDrinkMenu();
                     break;
                 case "3":
                     System.out.print("How many garlic knots would you like? ");
@@ -65,7 +64,7 @@ public class UserInterface {
                 case "4":
                     //runCheckoutMenu();
                     break;
-                case "5":
+                case "X":
                     System.out.println("Canceling order...");
                     running = false;
                     break;
@@ -80,7 +79,7 @@ public class UserInterface {
                 (2) Add Drink
                 (3) Add Garlic Knots
                 (4) Checkout
-                (5) Cancel Order""");
+                (X) Cancel Order""");
     }
 
 
@@ -205,6 +204,33 @@ public class UserInterface {
                 (C) Cheeses
                 (S) Sauces
                 (E) Extras""");
+    }
+    public void runDrinkMenu() {
+        boolean running = true;
+
+        while (running) {
+            displayDrinkMenu();
+            System.out.println("Choose Order Items: ");
+            String choice = scanner.nextLine().trim().toUpperCase();
+
+            switch (choice) {
+                case "S", "M", "L":
+                    break;
+                case "X":
+                    System.out.println("Returning to Order Menu....");
+                    running = false;
+                    break;
+            }
+        }
+    }
+
+    private void displayDrinkMenu() {
+        System.out.println("""
+                ========= Drink Menu (NOW ONLY SERVING DR. KELP!) =========
+                (S) Small 16oz Diet Dr. Kelp
+                (M) Medium 22oz Diet Dr. Kelp
+                (L) Large 30oz Diet Dr. Kelp
+                (X) Back to Order Menu""");
     }
 
 
