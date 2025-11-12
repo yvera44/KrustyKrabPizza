@@ -1,22 +1,25 @@
 package com.pluralsight.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
 
     private String customerName;
-    private List<String> sandwiches;
+    private LocalDateTime orderTime;
+    private List<String> pizzas;
     private List<String> drinks;
-    private List<String> chips;
+    private List<String> garlicKnots;
     private double totalPrice;
 
-    public Order(String customerName, List<String> sandwiches, List<String> drinks, List<String> chips, double totalPrice) {
-        this.customerName = customerName;
-        this.sandwiches = sandwiches;
-        this.drinks = drinks;
-        this.chips = chips;
-        this.totalPrice = 0.0;
+    public Order() {
+        this.customerName = "";
+        this.orderTime = LocalDateTime.now();
+        this.pizzas = new ArrayList<>();
+        this.drinks = new ArrayList<>();
+        this.garlicKnots = new ArrayList<>();
+        this.totalPrice = 0.00;
     }
 
 }

@@ -20,9 +20,7 @@ public class ReceiptWriter {
             FileWriter fileWriter = new FileWriter("receipt.txt", true );
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             // write to the file
-            bufferedWriter.write("line 1 is here \n");
-            bufferedWriter.write("line 2 is here \n");
-            bufferedWriter.write("line 3 is here \n");
+
 
             // close the writer
             bufferedWriter.close();

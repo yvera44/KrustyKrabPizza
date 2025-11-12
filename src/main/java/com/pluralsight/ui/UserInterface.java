@@ -1,5 +1,7 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.model.Order;
+import com.pluralsight.model.Pizza;
 import com.pluralsight.model.Topping;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ public class UserInterface {
 
         while (running) {
             displayMenu();
+            Order currentOrder = new Order();
             System.out.print("Choose and option: ");
             String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
@@ -88,6 +91,7 @@ public class UserInterface {
 
         while (running) {
             displayCrustMenu();
+            Pizza pizza = new Pizza();
             System.out.print("Choose your crust: ");
             String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
@@ -232,7 +236,6 @@ public class UserInterface {
                 (L) Large 30oz Diet Dr. Kelp
                 (X) Back to Order Menu""");
     }
-
 
 
     public List<Topping> loadRegularToppings() {
