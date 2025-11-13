@@ -1,5 +1,6 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.data.ReceiptWriter;
 import com.pluralsight.model.*;
 
 import java.util.ArrayList;
@@ -16,9 +17,8 @@ public class UserInterface {
 
         while (running) {
             displayMenu();
-            Order currentOrder = new Order();
             System.out.print("Choose and option: ");
-            String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
+            String choice = scanner.nextLine().trim().toUpperCase();
 
             switch (choice) {
                 case "1":
@@ -54,6 +54,7 @@ public class UserInterface {
     }
 
     public void runOrderMenu() {
+        Order currentOrder = new Order();
         boolean running = true;
 
         while (running) {
@@ -63,16 +64,22 @@ public class UserInterface {
 
             switch (choice) {
                 case "1":
-                    runPizzaMenu();
+                    Pizza pizza = runPizzaMenu();
+                    if (pizza != null){
+                        currentOrder.addPizza(pizza);
+                    }
                     break;
                 case "2":
-                    runDrinkMenu();
+                    Drink drink = runDrinkMenu();
+                    if (drink != null){
+                        currentOrder.addDrink(drink);
+                    }
                     break;
                 case "3":
                     System.out.print("How many garlic knots would you like? ");
                     break;
                 case "4":
-                    //runCheckoutMenu();
+                    runCheckOutMenu();
                     break;
                 case "X":
                     System.out.println("Canceling order...");
@@ -99,7 +106,7 @@ public class UserInterface {
                 ╚═══════════════════════════════════════════════╝""");
     }
 
-    public void runPizzaMenu() {
+    public Pizza runPizzaMenu() {
         displayCrustMenu();
         System.out.print("Choose your krust: ");
         String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
@@ -123,6 +130,7 @@ public class UserInterface {
         }
         System.out.println("You selected: " + crust + " krust"); // blank line for spacing
         runPizzaSize(crust);
+        return null;
     }
 
     private void displayCrustMenu() {
@@ -210,6 +218,9 @@ public class UserInterface {
                 case "E":
                     selectFromToppingList(pizza, loadSidesToppings(), "Extras");
                     break;
+                case "X":
+                    runOrderMenu();
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
@@ -218,8 +229,7 @@ public class UserInterface {
     }
 
     private void displayToppingsMenu() {
-        System.out.println("""
-                
+        System.out.println("""               
                 ╔═══════════════════════════════════════════════╗
                 ║                                               ║
                 ║                    TOPPINGS                   ║
@@ -231,6 +241,7 @@ public class UserInterface {
                 ║             [C] Cheeses                       ║
                 ║             [S] Sauces                        ║
                 ║             [E] Extras                        ║
+                ║             [X] Save & Exit to Main Menu      ║
                 ║                                               ║
                 ╚═══════════════════════════════════════════════╝""");
     }
@@ -279,7 +290,7 @@ public class UserInterface {
         }
     }
 
-    public void runDrinkMenu() {
+    public Drink runDrinkMenu() {
 
         displayDrinkMenu();
         System.out.print("Choose your drink size: ");
@@ -304,6 +315,7 @@ public class UserInterface {
         }
         System.out.println();
         selectFromDrinkList(size);
+        return null;
     }
 
     private void displayDrinkMenu() {
@@ -351,6 +363,45 @@ public class UserInterface {
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
         }
+    }
+
+    public void runCheckOutMenu() {
+        boolean running = true;
+        System.out.println("CHECKING OUT");
+
+        while (running) {
+            displayCheckOutMenu();
+            System.out.print("PLEASE CONFIRM YOUR ORDER:  ");
+            String choice = scanner.nextLine().trim().toUpperCase();
+
+            switch (choice) {
+                case "Y":
+                    break;
+                case "N":
+                    running = false;
+                    break;
+                case "S":
+                    System.out.println();
+                default:
+                    System.out.println("Wrong! Its either 1 or 0, we literally could not have made this any easier. ");
+            }
+            System.out.println(); // blank line for spacing
+        }
+    }
+
+    private void displayCheckOutMenu() {
+        System.out.println("""
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                   CHECKOUT                    ║
+                ║           Please confirm your order.          ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║        [Y] Yes                                ║
+                ║        [N] No                                 ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
     }
 
         public List<Topping> loadRegularToppings () {
