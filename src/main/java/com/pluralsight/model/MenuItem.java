@@ -9,6 +9,7 @@ public abstract class MenuItem {
     public MenuItem(double price, int quantity, String description) {
         this.price = price;
         this.quantity = quantity;
+        this.description = description;
     }
 
     public double getPrice() {

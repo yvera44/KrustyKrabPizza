@@ -237,10 +237,9 @@ public class UserInterface {
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
         }
-        Drink drink = new Drink("", 0, 0, 0);
     }
 
-    public void runDrinkMenu(Drink drink) {
+    public void runDrinkMenu() {
 
         displayDrinkMenu();
         System.out.print("Choose your drink size: ");
@@ -251,113 +250,139 @@ public class UserInterface {
             case "S":
                 size = 16;
                 System.out.println("16 Oz");
-                selectFromDrinkList(drink, loadDrinks(), "Drinks");
                 break;
             case "M":
                 size = 22;
                 System.out.println("22 Oz");
-                selectFromDrinkList(drink, loadDrinks(), "Drinks");
                 break;
             case "L":
                 size = 30;
                 System.out.println("30 Oz");
-                selectFromDrinkList(drink, loadDrinks(), "Drinks");
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
         }
         System.out.println();
-        Drink drink = new Drink(size);
+        selectFromDrinkList(size);
     }
 
     private void displayDrinkMenu() {
         System.out.println("""
-                   ========= Drink Menu (NOW ONLY SERVING DR. KELP!) =========
-                   (S) Small 16oz Diet Dr. Kelp
-                   (M) Medium 22oz Diet Dr. Kelp
-                   (L) Large 30oz Diet Dr. Kelp
+                   ========= Drink Menu =========
+                   (S) Small 16 oz
+                   (M) Medium 22 oz
+                   (L) Large 30 oz
                    (X) Back to Order Menu""");
     }
 
-    public List<Topping> loadRegularToppings() {
-        List<Topping> regularToppings = new ArrayList<>();
+    private void selectFromDrinkList(int size) {
+        List<String> drinkNames = loadDrinks();
 
-        Topping onions = new Topping("Onions", "Vegetable", false, 0);
-        regularToppings.add(onions);
+        System.out.println("========== Available Drinks ===========");
+        int index = 1;
+        for (String drinkName : drinkNames) {
+            System.out.println(index + " " + drinkName);
+            index++;
+        }
+        System.out.print("Choose a Drink: ");
 
-        Topping mushrooms = new Topping("Mushrooms", "Vegetable", false, 0);
-        regularToppings.add(mushrooms);
+        try {
+            int choice = Integer.parseInt(scanner.nextLine().trim());
+            if (choice == 0) {
+                return;
+            }
 
-        Topping bellPeppers = new Topping("Bell Peppers", "Vegetable", false, 0);
-        regularToppings.add(bellPeppers);
-
-        Topping olives = new Topping("Olives", "Vegetable", false, 0);
-        regularToppings.add(olives);
-
-        Topping tomatoes = new Topping("Tomatoes", "Fruit", false, 0);
-        regularToppings.add(tomatoes);
-
-        Topping spinach = new Topping("Spinach", "Vegetable", false, 0);
-        regularToppings.add(spinach);
-
-        Topping basil = new Topping("Basil", "Vegetable", false, 0);
-        regularToppings.add(basil);
-
-        Topping pineapple = new Topping("Pineapple", "Fruit", false, 0);
-        regularToppings.add(pineapple);
-
-        Topping anchovies = new Topping("Anchovies", "Meat", false, 0);
-        regularToppings.add(anchovies);
-
-        return regularToppings;
+            if (choice > 0 && choice <= drinkNames.size()) {
+                String selectedDrink = drinkNames.get(choice - 1);
+                Drink drink = new Drink(selectedDrink, size, 0, 1);
+                System.out.println(drink + " added to order!");
+            } else {
+                System.out.println("Invalid Choice.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid number.");
+        }
     }
 
-    public List<Topping> loadMeatToppings() {
-        List<Topping> meatToppings = new ArrayList<>();
+        public List<Topping> loadRegularToppings () {
+            List<Topping> regularToppings = new ArrayList<>();
 
-        Topping pepperoni = new Topping("Pepperoni", "Meat", false, 1.00);
-        meatToppings.add(pepperoni);
+            Topping onions = new Topping("Onions", "Vegetable", false, 0);
+            regularToppings.add(onions);
 
-        Topping sausage = new Topping("Sausage", "Meat", false, 1.00);
-        meatToppings.add(sausage);
+            Topping mushrooms = new Topping("Mushrooms", "Vegetable", false, 0);
+            regularToppings.add(mushrooms);
 
-        Topping ham = new Topping("Ham", "Meat", false, 1.00);
-        meatToppings.add(ham);
+            Topping bellPeppers = new Topping("Bell Peppers", "Vegetable", false, 0);
+            regularToppings.add(bellPeppers);
 
-        Topping bacon = new Topping("Bacon", "Meat", false, 1.00);
-        meatToppings.add(bacon);
+            Topping olives = new Topping("Olives", "Vegetable", false, 0);
+            regularToppings.add(olives);
 
-        Topping chicken = new Topping("Chicken", "Meat", false, 1.00);
-        meatToppings.add(chicken);
+            Topping tomatoes = new Topping("Tomatoes", "Fruit", false, 0);
+            regularToppings.add(tomatoes);
 
-        Topping meatball = new Topping("Meatball", "Meat", false, 1.00);
-        meatToppings.add(meatball);
+            Topping spinach = new Topping("Spinach", "Vegetable", false, 0);
+            regularToppings.add(spinach);
 
-        return meatToppings;
-    }
+            Topping basil = new Topping("Basil", "Vegetable", false, 0);
+            regularToppings.add(basil);
 
-    public List<Topping> loadCheeseToppings() {
-        List<Topping> cheeseToppings = new ArrayList<>();
+            Topping pineapple = new Topping("Pineapple", "Fruit", false, 0);
+            regularToppings.add(pineapple);
 
-        Topping mozzarella = new Topping("Mozzarella", "Cheese", false, 0.75);
-        cheeseToppings.add(mozzarella);
+            Topping anchovies = new Topping("Anchovies", "Meat", false, 0);
+            regularToppings.add(anchovies);
 
-        Topping parmesan = new Topping("Parmesan", "Cheese", false, 0.75);
-        cheeseToppings.add(parmesan);
+            return regularToppings;
+        }
 
-        Topping ricotta = new Topping("Ricotta", "Cheese", false, 0.75);
-        cheeseToppings.add(ricotta);
+        public List<Topping> loadMeatToppings () {
+            List<Topping> meatToppings = new ArrayList<>();
 
-        Topping goatCheese = new Topping("Goat Cheese", "Cheese", false, 0.75);
-        cheeseToppings.add(goatCheese);
+            Topping pepperoni = new Topping("Pepperoni", "Meat", false, 1.00);
+            meatToppings.add(pepperoni);
 
-        Topping buffaloCheese = new Topping("Buffalo Cheese", "Cheese", false, 0.75);
-        cheeseToppings.add(buffaloCheese);
+            Topping sausage = new Topping("Sausage", "Meat", false, 1.00);
+            meatToppings.add(sausage);
 
-        return cheeseToppings;
-    }
+            Topping ham = new Topping("Ham", "Meat", false, 1.00);
+            meatToppings.add(ham);
 
-    public List<Topping> loadSauceToppings () {
+            Topping bacon = new Topping("Bacon", "Meat", false, 1.00);
+            meatToppings.add(bacon);
+
+            Topping chicken = new Topping("Chicken", "Meat", false, 1.00);
+            meatToppings.add(chicken);
+
+            Topping meatball = new Topping("Meatball", "Meat", false, 1.00);
+            meatToppings.add(meatball);
+
+            return meatToppings;
+        }
+
+        public List<Topping> loadCheeseToppings () {
+            List<Topping> cheeseToppings = new ArrayList<>();
+
+            Topping mozzarella = new Topping("Mozzarella", "Cheese", false, 0.75);
+            cheeseToppings.add(mozzarella);
+
+            Topping parmesan = new Topping("Parmesan", "Cheese", false, 0.75);
+            cheeseToppings.add(parmesan);
+
+            Topping ricotta = new Topping("Ricotta", "Cheese", false, 0.75);
+            cheeseToppings.add(ricotta);
+
+            Topping goatCheese = new Topping("Goat Cheese", "Cheese", false, 0.75);
+            cheeseToppings.add(goatCheese);
+
+            Topping buffaloCheese = new Topping("Buffalo Cheese", "Cheese", false, 0.75);
+            cheeseToppings.add(buffaloCheese);
+
+            return cheeseToppings;
+        }
+
+        public List<Topping> loadSauceToppings () {
             List<Topping> sauceToppings = new ArrayList<>();
 
             Topping marinara = new Topping("Marinara", "Sauce", false, 0);
@@ -379,10 +404,10 @@ public class UserInterface {
             sauceToppings.add(oliveOil);
 
             return sauceToppings;
-    }
+        }
 
-    public List<Topping> loadSidesToppings () {
-        List<Topping> sidesToppings = new ArrayList<>();
+        public List<Topping> loadSidesToppings () {
+            List<Topping> sidesToppings = new ArrayList<>();
 
             Topping redPepper = new Topping("Red Pepper", "Side", false, 0);
             sidesToppings.add(redPepper);
@@ -391,29 +416,16 @@ public class UserInterface {
             sidesToppings.add(parmesan);
 
             return sidesToppings;
-    }
+        }
 
-    public List<Drink> loadDrinks() {
-        List<Drink> drinks = new ArrayList<>();
-
-        Drink dietDrKelp = new Drink("Diet Dr. Kelp", 0, 0, 0);
-        drinks.add(dietDrKelp);
-
-        Drink drKelp = new Drink("Dr. Kelp", 0, 0, 0);
-        drinks.add(drKelp);
-
-        Drink kelpsi = new Drink("Kelpsi", 0, 0, 0);
-        drinks.add(kelpsi);
-
-        Drink mountainClimb = new Drink("Mountain Climb-Up-And-Fall-Off", 0, 0, 0);
-        drinks.add(mountainClimb);
-
-        Drink kelpCola = new Drink("Kelp Cola", 0, 0, 0);
-        drinks.add(kelpCola);
-
-        Drink kelpShake = new Drink("Kelp Shake", 0, 0, 0);
-        drinks.add(kelpShake);
-
-        return drinks;
-    }
+        public List<String> loadDrinks () {
+            List<String> drinkNames = new ArrayList<>();
+            drinkNames.add("Diet Dr. Kelp");
+            drinkNames.add("Dr. Kelp");
+            drinkNames.add("Kelpsi");
+            drinkNames.add("Mountain Climb-Up-And-Fall-Off");
+            drinkNames.add("Kelp Shake");
+            drinkNames.add("Water");
+            return drinkNames;
+        }
 }

@@ -23,9 +23,12 @@ public class Drink extends MenuItem {
             }
         }
         public double calculateFinalDrinkPrice (int size){
-            return price * getDrinkSizeMultiplier(size);
+            return getDrinkSizeMultiplier(this.size);
 
         }
+
+
     }
-}
+
+
 
