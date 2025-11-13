@@ -251,7 +251,9 @@ public class UserInterface {
 //create own method:
         int index = 1;
         for (Topping topping : toppings) {
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println(index + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
             index++;
         }
         System.out.print("Choose a topping or 0 to go back: ");
@@ -366,16 +368,18 @@ public class UserInterface {
     }
 
     public void runCheckOutMenu() {
+        Order order = new Order();
         boolean running = true;
         System.out.println("CHECKING OUT");
 
         while (running) {
-            displayCheckOutMenu();
+            displayCheckOutMenu(order);
             System.out.print("PLEASE CONFIRM YOUR ORDER:  ");
             String choice = scanner.nextLine().trim().toUpperCase();
 
             switch (choice) {
                 case "Y":
+                    System.out.println();
                     break;
                 case "N":
                     running = false;
@@ -383,25 +387,61 @@ public class UserInterface {
                 case "S":
                     System.out.println();
                 default:
-                    System.out.println("Wrong! Its either 1 or 0, we literally could not have made this any easier. ");
+                    System.out.println("Invalid input... Please try again. ");
             }
             System.out.println(); // blank line for spacing
         }
     }
 
-    private void displayCheckOutMenu() {
+    private void displayCheckOutMenu(Order order) {
         System.out.println("""
                 ╔═══════════════════════════════════════════════╗
                 ║                                               ║
                 ║                   CHECKOUT                    ║
                 ║           Please confirm your order.          ║
                 ║                                               ║
-                ╠═══════════════════════════════════════════════╣
-                ║                                               ║
-                ║        [Y] Yes                                ║
-                ║        [N] No                                 ║
-                ║                                               ║
-                ╚═══════════════════════════════════════════════╝""");
+                ╠═══════════════════════════════════════════════╣""");
+
+        // Display Pizzas
+        if (!order.getPizzas().isEmpty()) {
+            System.out.println("PIZZAS:");
+            for (Pizza pizza : order.getPizzas()) {
+                System.out.println("  - " + pizza.toString());
+            }
+            System.out.println();
+        }
+
+        // Display Drinks
+        if (!order.getDrinks().isEmpty()) {
+            System.out.println("DRINKS:");
+            for (Drink drink : order.getDrinks()) {
+                System.out.println("  - " + drink.toString());
+            }
+            System.out.println();
+        }
+
+        // Display Garlic Knots
+        if (!order.getGarlicKnots().isEmpty()) {
+            System.out.println("GARLIC KNOTS:");
+            for (GarlicKnots knots : order.getGarlicKnots()) {
+                System.out.println("  - " + knots.toString());
+            }
+            System.out.println();
+        }
+
+        // Display Total
+        double total = order.calculateTotal();
+        System.out.println("═══════════════════════════════════════════════");
+        System.out.printf("TOTAL: $%.2f\n", total);
+        System.out.println("═══════════════════════════════════════════════");
+
+        System.out.println("""
+            
+            ╔═══════════════════════════════════════════════╗
+            ║        [Y] Confirm Order                      ║
+            ║        [N] Cancel Order                       ║
+            ╚═══════════════════════════════════════════════╝
+            """);
     }
 
         public List<Topping> loadRegularToppings () {

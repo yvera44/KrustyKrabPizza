@@ -14,7 +14,6 @@ public class Order {
     private List<MenuItem> totalItems;
     private double totalPrice;
 
-
     public Order() {
         this.customerName = "";
         this.orderTime = LocalDateTime.now();
@@ -55,6 +54,35 @@ public class Order {
         }
         return total;
     }
+
+    public String getOrderSummary() {
+        StringBuilder summary = new StringBuilder("═══════════ Order Summary ═══════════\n");
+
+        if (!pizzas.isEmpty()) {
+            summary.append("\nPizzas:\n");
+            pizzas.stream()
+                    .forEach(pizza -> summary.append(" - ").append(pizza.()).append("\n"));
+        }
+
+        if (!drinks.isEmpty()) {
+            summary.append("\nDrinks:\n");
+            drinks.stream()
+                    .forEach(drink -> summary.append(" - ").append(drink).append("\n"));
+        }
+
+        if (!garlicKnots.isEmpty()) {
+            summary.append("\nGarlic Knots:\n");
+            garlicKnots.stream()
+                    .forEach(garlicKnots -> summary.append(" - ").append(garlicKnots).append("\n"));
+        }
+
+        summary.append("\nTotal: $").append(String.format("%.2f", calculateTotal())).append("\n");
+        summary.append("═══════════════════════════════════");
+
+        return summary.toString();
+    }
+
+
 
     public String getCustomerName() {
         return customerName;

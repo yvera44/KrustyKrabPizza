@@ -14,7 +14,6 @@ public class Pizza extends MenuItem {
         this.crust = crust;
         this.size = size;
         this.toppings = new ArrayList<>();
-
     }
 
     public String getCrust() {

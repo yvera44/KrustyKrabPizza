@@ -57,7 +57,6 @@ public class ReceiptWriter {
             itemList += String.format("Price: $ %.2f\n\n", menuItem.getPrice());
 
         }
-
         return String.format("""
                 Krusty Krab Pizza
                 %s Customer Name
@@ -67,4 +66,5 @@ public class ReceiptWriter {
                
                 """, order.getCustomerName(), order.getOrderTime(), itemList, order.getTotalPrice());
     }
+
 }
