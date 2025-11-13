@@ -39,9 +39,17 @@ public class UserInterface {
 
     private void displayMenu() {
         System.out.println("""
-                ========= Main Menu ======
-                (1) New Order
-                (0) Exit Menu""");
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║         THE KRUSTY KRAB PIZZA PARLOR          ║
+                ║          "The Pizza for You and Me"           ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║        [1] New Order                          ║
+                ║        [0] Exit                               ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
 
     }
 
@@ -76,18 +84,24 @@ public class UserInterface {
 
     private void displayItemMenu() {
         System.out.println("""
-                ========= Order Menu ======
-                (1) Add Pizza
-                (2) Add Drink
-                (3) Add Garlic Knots
-                (4) Checkout
-                (X) Cancel Order""");
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                   ITEM MENU                   ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║             [1] Add Pizza                     ║
+                ║             [2] Add Drink                     ║
+                ║             [3] Add Garlic Knots              ║
+                ║             [4] Checkout                      ║
+                ║             [X] Cancel Order                  ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
     }
-
 
     public void runPizzaMenu() {
         displayCrustMenu();
-        System.out.print("Choose your crust: ");
+        System.out.print("Choose your krust: ");
         String choice = scanner.nextLine().trim().toUpperCase(); // normalize input
 
         String crust = "";
@@ -107,17 +121,25 @@ public class UserInterface {
             default:
                 System.out.println("Invalid choice. Please try again.");
         }
-        System.out.println("You selected: " + crust + " crust"); // blank line for spacing
+        System.out.println("You selected: " + crust + " krust"); // blank line for spacing
         runPizzaSize(crust);
     }
 
     private void displayCrustMenu() {
         System.out.println("""
-                ========= Crust Types ======
-                (1) Thin
-                (2) Regular
-                (3) Thick
-                (4) Cauliflower""");
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                  KRUST TYPES                  ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║              [1] Thin                         ║
+                ║              [2] Regular                      ║
+                ║              [3] Thick                        ║
+                ║              [4] Cauliflower                  ║
+                ║              [X] Cancel Order                 ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
     }
 
     public void runPizzaSize(String crust) {
@@ -151,10 +173,17 @@ public class UserInterface {
 
     private void displayPizzaSizes() {
         System.out.println("""
-                ========= Pizza Sizes ======
-                (S) 8 inch
-                (M) 12 inch
-                (L) 16 inch""");
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                  PIZZA SIZES                  ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║               [S] Small 8"                    ║
+                ║               [M] Medium 12"                  ║
+                ║               [L] Large 16"                   ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
     }
 
     public void runToppingsMenu(Pizza pizza) {
@@ -190,16 +219,24 @@ public class UserInterface {
 
     private void displayToppingsMenu() {
         System.out.println("""
-                ========= Toppings ======
-                (R) Regular Toppings
-                (M) Meats
-                (C) Cheeses
-                (S) Sauces
-                (E) Extras""");
+                
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                    TOPPINGS                   ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║             [R] Regular Toppings              ║
+                ║             [M] Meats                         ║
+                ║             [C] Cheeses                       ║
+                ║             [S] Sauces                        ║
+                ║             [E] Extras                        ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
     }
 
     private void selectFromToppingList(Pizza pizza, List<Topping> toppings, String catergory) {
-        System.out.println("=========== " + catergory + " ===========");
+        System.out.println("════════════ " + catergory + " ════════════");
 //create own method:
         int index = 1;
         for (Topping topping : toppings) {
@@ -227,7 +264,10 @@ public class UserInterface {
                 } else {
                     pizza.addTopping(selectedTopping);
                 }
-                System.out.println(selectedTopping.getToppingName() + " added!");
+                System.out.println("╔════════════════════════════════════╗");
+                System.out.println("║          ✓ TOPPING ADDED!           ");
+                System.out.println("║             " + selectedTopping.getToppingName());
+                System.out.println("╚════════════════════════════════════╝");
                 selectedTopping.calculateFinalToppingPrice(pizza.getSize());
 
                 System.out.println(selectedTopping.calculateFinalToppingPrice(pizza.getSize()));
@@ -268,17 +308,24 @@ public class UserInterface {
 
     private void displayDrinkMenu() {
         System.out.println("""
-                   ========= Drink Menu =========
-                   (S) Small 16 oz
-                   (M) Medium 22 oz
-                   (L) Large 30 oz
-                   (X) Back to Order Menu""");
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                    DRINKS                     ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║             [S] Small 16 oz                   ║
+                ║             [M] Medium 22 oz                  ║
+                ║             [L] Large 30 oz                   ║
+                ║             [X] Back to Order Menu            ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
     }
 
     private void selectFromDrinkList(int size) {
         List<String> drinkNames = loadDrinks();
 
-        System.out.println("========== Available Drinks ===========");
+        System.out.println("════════════ Available Drinks ════════════");
         int index = 1;
         for (String drinkName : drinkNames) {
             System.out.println(index + " " + drinkName);
@@ -295,7 +342,9 @@ public class UserInterface {
             if (choice > 0 && choice <= drinkNames.size()) {
                 String selectedDrink = drinkNames.get(choice - 1);
                 Drink drink = new Drink(selectedDrink, size, 0, 1);
-                System.out.println(drink + " added to order!");
+                System.out.println("╔══════════════════════════════════════════════════════╗");
+                System.out.println("║     ✓ DRINK ADDED!" + drink);
+                System.out.println("╚══════════════════════════════════════════════════════╝");
             } else {
                 System.out.println("Invalid Choice.");
             }

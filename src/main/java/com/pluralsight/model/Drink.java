@@ -9,6 +9,10 @@ public class Drink extends MenuItem {
         this.size = size;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public double getDrinkSizeMultiplier (int size){
 
             switch (size) {
@@ -22,13 +26,21 @@ public class Drink extends MenuItem {
                     return 0.00;
             }
         }
-        public double calculateFinalDrinkPrice (int size){
+        public double calculateFinalDrinkPrice (){
             return getDrinkSizeMultiplier(this.size);
-
         }
 
-
+    @Override
+    public double getPrice() {
+        return calculateFinalDrinkPrice();
     }
+
+    @Override
+    public String toString() {
+        return size + "oz " + getDescription() + " - $" + String.format("%.2f", calculateFinalDrinkPrice());
+    }
+}
+
 
 
 
