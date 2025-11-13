@@ -44,5 +44,21 @@ public class Topping {
         this.basePrice = basePrice;
     }
 
+    public double getToppingSizeMultiplier (int size) {
 
+        switch (size) {
+            case 8:
+                return 1.00;
+            case 12:
+                return 2.00;
+            case 16:
+                return 3.00;
+            default:
+                return 0.00;
+        }
+    }
+    public double calculateFinalToppingPrice (int size){
+        return basePrice * getToppingSizeMultiplier(size);
+
+    }
 }

@@ -11,8 +11,8 @@ public class Pizza extends MenuItem {
 
     public Pizza(String crust,int size) {
         super(0.0, 0, "Pizza");
-        this.crust = "";
-        this.size = 0;
+        this.crust = crust;
+        this.size = size;
         this.toppings = new ArrayList<>();
 
     }
@@ -42,5 +42,6 @@ public class Pizza extends MenuItem {
     }
 
     public void addTopping(Topping selectedTopping) {
+
     }
 }

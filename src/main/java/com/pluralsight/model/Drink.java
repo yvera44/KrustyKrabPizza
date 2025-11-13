@@ -2,34 +2,30 @@ package com.pluralsight.model;
 
 public class Drink extends MenuItem {
 
-    private String size;
+    private int size;
 
-    public Drink(double price, int quantity, String description, String size) {
+    public Drink(String description, int size, double price, int quantity) {
         super(price, quantity, description);
         this.size = size;
-
-        if (this.size.equalsIgnoreCase("Small")) {
-            price = 2.00;
-        }else if (this.size.equalsIgnoreCase("Medium")){
-            price = 2.50;
-        }else if (this.size.equalsIgnoreCase("Large")){
-            price = 3.00;
-        }else
-            price = 0;
-
-    }
-    public String getSize() {
-        return size;
     }
 
-    @Override
-    public String toString() {
-        return "Drink{" +
-                "size='" + size + '\'' +
-                '}';
+    public double getDrinkSizeMultiplier (int size){
+
+            switch (size) {
+                case 16:
+                    return 2.00;
+                case 22:
+                    return 2.50;
+                case 30:
+                    return 3.50;
+                default:
+                    return 0.00;
+            }
+        }
+        public double calculateFinalDrinkPrice (int size){
+            return price * getDrinkSizeMultiplier(size);
+
+        }
     }
 }
-
-
-
 
