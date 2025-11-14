@@ -1,6 +1,5 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.data.Colors;
 import com.pluralsight.data.ReceiptWriter;
 import com.pluralsight.model.*;
 

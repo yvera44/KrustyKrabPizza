@@ -1,4 +1,4 @@
-package com.pluralsight.data;
+package com.pluralsight.ui;
 
 public class Colors { // Reset
         public static final String RESET = "\033[0m";

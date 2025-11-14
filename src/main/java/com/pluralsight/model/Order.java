@@ -1,6 +1,6 @@
 package com.pluralsight.model;
 
-import com.pluralsight.data.Colors;
+import com.pluralsight.ui.Colors;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
