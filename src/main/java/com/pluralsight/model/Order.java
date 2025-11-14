@@ -61,7 +61,7 @@ public class Order {
         if (!pizzas.isEmpty()) {
             summary.append("\nPizzas:\n");
             pizzas.stream()
-                    .forEach(pizza -> summary.append(" - ").append(pizza.()).append("\n"));
+                    .forEach(pizza -> summary.append(" - ").append(pizza.toString()).append("\n"));
         }
 
         if (!drinks.isEmpty()) {

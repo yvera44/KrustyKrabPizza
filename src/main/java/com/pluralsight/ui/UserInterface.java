@@ -1,6 +1,5 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.data.ReceiptWriter;
 import com.pluralsight.model.*;
 
 import java.util.ArrayList;
@@ -79,7 +78,7 @@ public class UserInterface {
                     System.out.print("How many garlic knots would you like? ");
                     break;
                 case "4":
-                    runCheckOutMenu();
+                    runCheckOutMenu(currentOrder);
                     break;
                 case "X":
                     System.out.println("Canceling order...");
@@ -127,10 +126,11 @@ public class UserInterface {
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
+                return null;
         }
         System.out.println("You selected: " + crust + " krust"); // blank line for spacing
-        runPizzaSize(crust);
-        return null;
+        return runPizzaSize(crust);
+
     }
 
     private void displayCrustMenu() {
@@ -150,13 +150,12 @@ public class UserInterface {
                 ╚═══════════════════════════════════════════════╝""");
     }
 
-    public void runPizzaSize(String crust) {
-
+    public Pizza runPizzaSize(String crust) {
         displayPizzaSizes();
         System.out.print("Choose your pizza size: ");
         String choice = scanner.nextLine().trim().toUpperCase();
 
-        int size = 0;// normalize input
+        int size = 0;
         switch (choice) {
             case "S":
                 size = 8;
@@ -175,8 +174,8 @@ public class UserInterface {
         }
         System.out.println();
         Pizza pizza = new Pizza(crust, size);
-
         runToppingsMenu(pizza);
+        return pizza;
     }
 
     private void displayPizzaSizes() {
@@ -194,7 +193,7 @@ public class UserInterface {
                 ╚═══════════════════════════════════════════════╝""");
     }
 
-    public void runToppingsMenu(Pizza pizza) {
+    public Pizza runToppingsMenu(Pizza pizza) {
         boolean running = true;
 
         while (running) {
@@ -226,6 +225,7 @@ public class UserInterface {
             }
             System.out.println(); // blank line for spacing
         }
+        return pizza;
     }
 
     private void displayToppingsMenu() {
@@ -251,9 +251,9 @@ public class UserInterface {
 //create own method:
         int index = 1;
         for (Topping topping : toppings) {
-            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("═════════════════════════════════════════════════════════════════");
             System.out.println(index + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
-            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println("═════════════════════════════════════════════════════════════════");
             index++;
         }
         System.out.print("Choose a topping or 0 to go back: ");
@@ -367,8 +367,8 @@ public class UserInterface {
         }
     }
 
-    public void runCheckOutMenu() {
-        Order order = new Order();
+    public void runCheckOutMenu(Order order) {
+
         boolean running = true;
         System.out.println("CHECKING OUT");
 
