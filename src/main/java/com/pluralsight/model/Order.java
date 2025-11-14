@@ -1,5 +1,7 @@
 package com.pluralsight.model;
 
+import com.pluralsight.data.Colors;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +58,7 @@ public class Order {
     }
 
     public String getOrderSummary() {
-        StringBuilder summary = new StringBuilder("═══════════ Order Summary ═══════════\n");
+        StringBuilder summary = new StringBuilder(Colors.YELLOW + "═══════════ Order Summary ═══════════\n");
 
         if (!pizzas.isEmpty()) {
             summary.append("\nPizzas:\n");
@@ -77,7 +79,7 @@ public class Order {
         }
 
         summary.append("\nTotal: $").append(String.format("%.2f", calculateTotal())).append("\n");
-        summary.append("═════════════════════════════════");
+        summary.append(Colors.YELLOW + "═════════════════════════════════");
 
         return summary.toString();
     }

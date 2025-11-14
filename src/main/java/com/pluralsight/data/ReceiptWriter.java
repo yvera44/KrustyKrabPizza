@@ -25,7 +25,7 @@ public class ReceiptWriter {
             bufferedWriter.write("╔═══════════════════════════════════════════════╗\n");
             bufferedWriter.write("║                                               ║\n");
             bufferedWriter.write("║         THE KRUSTY KRAB PIZZA PARLOR          ║\n");
-            bufferedWriter.write("║          \"The Pizza for You and Me\"         ║\n");
+            bufferedWriter.write("║          \"The Pizza for You and Me\"           ║\n");
             bufferedWriter.write("║                                               ║\n");
             bufferedWriter.write("╚═══════════════════════════════════════════════╝\n\n");
 
