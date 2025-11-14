@@ -7,13 +7,11 @@ public class Topping {
     private boolean isExtra;
     private double basePrice;
 
-
     public Topping(String toppingName, String toppingType, boolean isExtra, double basePrice) {
         this.toppingName = toppingName;
         this.toppingType = toppingType;
         this.isExtra = isExtra;
         this.basePrice = basePrice;
-
     }
 
     public String getToppingName() {
