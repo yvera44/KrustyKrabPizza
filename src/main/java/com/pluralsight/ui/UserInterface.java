@@ -32,7 +32,7 @@ public class UserInterface {
                     System.out.println("Wrong! Its either 1 or 0, we literally could not have made this any easier. ");
             }
 
-            System.out.println(); // blank line for spacing
+            System.out.println();
 
         }
     }
@@ -46,8 +46,8 @@ public class UserInterface {
                 ║                                               ║
                 ╠═══════════════════════════════════════════════╣
                 ║                                               ║
-                ║        [1] New Order                          ║
-                ║        [0] Exit                               ║
+                ║                [1] New Order                  ║
+                ║                [0] Exit                       ║
                 ║                                               ║
                 ╚═══════════════════════════════════════════════╝""");
 

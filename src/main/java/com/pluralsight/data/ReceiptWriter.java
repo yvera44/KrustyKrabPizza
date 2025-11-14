@@ -21,7 +21,7 @@ public class ReceiptWriter {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            // write to the file
+
             bufferedWriter.write("╔═══════════════════════════════════════════════╗\n");
             bufferedWriter.write("║                                               ║\n");
             bufferedWriter.write("║         THE KRUSTY KRAB PIZZA PARLOR          ║\n");
@@ -38,21 +38,19 @@ public class ReceiptWriter {
 
             bufferedWriter.write(order.getOrderSummary());
 
-            // Write total
+
             bufferedWriter.write("══════════════\n");
             bufferedWriter.write(String.format("%15s\n", String.format("TOTAL: $%.2f", order.calculateTotal())));
-//          bufferedWriter.write("═══════════════════════════════════════════════\n\n");
+            //bufferedWriter.write("═══════════════════════════════════════════════\n\n");
 
-            // Write footer
+
             bufferedWriter.write("        Thank You for Your Order!\n");
             bufferedWriter.write("      We Hope to See You Again Soon!\n\n");
             bufferedWriter.write("═══════════════════════════════════════════════\n");
 
             bufferedWriter.close();
-
             System.out.println("Receipt saved to: " + fileName);
 
-            // close the writer
             bufferedWriter.close();
         } catch (IOException e) {
             System.out.println("ERROR: An unexpected error occurred");
@@ -61,7 +59,7 @@ public class ReceiptWriter {
     }
 
     private static String generateTimestamp() {
-        // Create timestamp string useing a formatter
+        // Create timestamp string using a formatter
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
 
         LocalDateTime now = LocalDateTime.now();
