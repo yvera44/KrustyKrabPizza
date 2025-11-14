@@ -9,9 +9,6 @@ public class Drink extends MenuItem {
         this.size = size;
     }
 
-    public int getSize() {
-        return size;
-    }
 
     public double getDrinkSizeMultiplier (int size){
 

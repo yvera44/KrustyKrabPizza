@@ -35,10 +35,10 @@ public class Order {
     public void addGarlicKnots(GarlicKnots knots) {
         garlicKnots.add(knots);
     }
-    public void addTotalItems(Pizza pizzas, Drink drinks, GarlicKnots garlicKnots) {
+    public void addTotalItems(Pizza pizzas, Drink drinks, GarlicKnots knots) {
         totalItems.add(pizzas);
         totalItems.add(drinks);
-        totalItems.add(garlicKnots);
+        totalItems.add(knots);
     }
 
     public double calculateTotal() {
@@ -81,8 +81,6 @@ public class Order {
 
         return summary.toString();
     }
-
-
 
     public String getCustomerName() {
         return customerName;

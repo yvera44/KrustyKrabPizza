@@ -16,15 +16,16 @@ public class ReceiptWriter {
 
     public static void saveReceipt(Order order) {
         String fileName = generateTimestamp() + ".txt";
+        String filePath = "receipts/" + fileName;
 
         try {
-            FileWriter fileWriter = new FileWriter(fileName);
+            FileWriter fileWriter = new FileWriter(filePath);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             // write to the file
             bufferedWriter.write("╔═══════════════════════════════════════════════╗\n");
             bufferedWriter.write("║                                               ║\n");
             bufferedWriter.write("║         THE KRUSTY KRAB PIZZA PARLOR          ║\n");
-            bufferedWriter.write("║          \"The Pizza for You and Me\"           ║\n");
+            bufferedWriter.write("║          \"The Pizza for You and Me\"         ║\n");
             bufferedWriter.write("║                                               ║\n");
             bufferedWriter.write("╚═══════════════════════════════════════════════╝\n\n");
 
@@ -38,9 +39,9 @@ public class ReceiptWriter {
             bufferedWriter.write(order.getOrderSummary());
 
             // Write total
-            bufferedWriter.write("═══════════════════════════════════════════════\n");
-            bufferedWriter.write(String.format("                TOTAL: $%.2f\n", order.calculateTotal()));
-            bufferedWriter.write("═══════════════════════════════════════════════\n\n");
+            bufferedWriter.write("══════════════\n");
+            bufferedWriter.write(String.format("%15s\n", String.format("TOTAL: $%.2f", order.calculateTotal())));
+//          bufferedWriter.write("═══════════════════════════════════════════════\n\n");
 
             // Write footer
             bufferedWriter.write("        Thank You for Your Order!\n");
@@ -61,7 +62,7 @@ public class ReceiptWriter {
 
     private static String generateTimestamp() {
         // Create timestamp string useing a formatter
-        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
 
         LocalDateTime now = LocalDateTime.now();
         return now.format(formatter1);

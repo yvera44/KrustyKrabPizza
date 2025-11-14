@@ -76,7 +76,10 @@ public class UserInterface {
                     }
                     break;
                 case "3":
-                    System.out.print("How many garlic knots would you like? ");
+                    GarlicKnots garlicKnots = runGarlicKnotsMenu();
+                    if (garlicKnots != null){
+                        currentOrder.addGarlicKnots(garlicKnots);
+                    }
                     break;
                 case "4":
                     runCheckOutMenu(currentOrder);
@@ -254,7 +257,6 @@ public class UserInterface {
         for (Topping topping : toppings) {
 
             System.out.println("          ["+ index + "]" + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
-            System.out.println("═════════════════════════════════════════════");
             index++;
         }
         System.out.print("Choose a topping or 0 to go back: ");
@@ -345,7 +347,7 @@ public class UserInterface {
         System.out.println("════════════ Available Drinks ════════════");
         int index = 1;
         for (String drinkName : drinkNames) {
-            System.out.println(index + " " + drinkName);
+            System.out.println("          ["+ index + "]"  + " " + drinkName);
             index++;
         }
         System.out.print("Choose a Drink: ");
@@ -373,6 +375,58 @@ public class UserInterface {
         return null;
     }
 
+    public GarlicKnots runGarlicKnotsMenu() {
+
+        displayGarlicKnotsMenu();
+        System.out.print("Choose your drink size: ");
+        String choice = scanner.nextLine().trim().toUpperCase();
+
+        int quantity = 0;
+        switch (choice) {
+            case "S":
+                quantity = 3;
+                System.out.println("3 Piece Garlic Knots");
+                break;
+            case "M":
+                quantity = 5;
+                System.out.println("5 Piece Garlic Knots");
+                break;
+            case "L":
+                quantity = 8;
+                System.out.println("8 Piece Garlic Knots");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                return null;
+        }
+        System.out.println();
+
+        GarlicKnots garlicKnots = new GarlicKnots(0, quantity, "Garlic Knots");
+
+        System.out.println("╔══════════════════════════════════════════════════════════╗");
+        System.out.println("║       GARLIC KNOTS ADDED! " + garlicKnots);
+        System.out.println("╚══════════════════════════════════════════════════════════╝");
+
+        return garlicKnots;
+    }
+
+    private void displayGarlicKnotsMenu() {
+        System.out.println("""
+                ╔═══════════════════════════════════════════════╗
+                ║                                               ║
+                ║                 GARLIC KNOTS                  ║
+                ║                                               ║
+                ╠═══════════════════════════════════════════════╣
+                ║                                               ║
+                ║       [S] 3 Piece Garlic Knots  ($4.00)       ║
+                ║       [M] 5 Piece Garlic Knots  ($5.50)       ║
+                ║       [L] 8 Piece Garlic Knots  ($7.00)       ║
+                ║                                               ║
+                ║            [X] Back to Order Menu             ║
+                ║                                               ║
+                ╚═══════════════════════════════════════════════╝""");
+    }
+
     public void runCheckOutMenu(Order order) {
 
         boolean running = true;
@@ -396,7 +450,7 @@ public class UserInterface {
                 default:
                     System.out.println("Invalid input... Please try again. ");
             }
-            System.out.println(); // blank line for spacing
+            System.out.println();
         }
     }
 
@@ -449,6 +503,7 @@ public class UserInterface {
             ╚═══════════════════════════════════════════════╝
             """);
     }
+
     private void completeOrder(Order order) {
         System.out.println("\nFinal Order Summary:");
         System.out.println(order.getOrderSummary());
@@ -461,7 +516,6 @@ public class UserInterface {
 
         scanner.close();
     }
-
 
     public List<Topping> loadRegularToppings () {
             List<Topping> regularToppings = new ArrayList<>();
