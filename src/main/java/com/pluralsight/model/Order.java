@@ -77,7 +77,7 @@ public class Order {
         }
 
         summary.append("\nTotal: $").append(String.format("%.2f", calculateTotal())).append("\n");
-        summary.append("═══════════════════════════════════");
+        summary.append("═════════════════════════════════");
 
         return summary.toString();
     }

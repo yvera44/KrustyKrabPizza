@@ -90,6 +90,7 @@ public class Pizza extends MenuItem {
     }
 
     public void addTopping(Topping selectedTopping) {
+        this.toppings.add(selectedTopping);
 
     }
 }

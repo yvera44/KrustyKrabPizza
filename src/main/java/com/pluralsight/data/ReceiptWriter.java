@@ -1,7 +1,6 @@
 package com.pluralsight.data;
 
-import com.pluralsight.model.MenuItem;
-import com.pluralsight.model.Order;
+import com.pluralsight.model.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,16 +14,42 @@ public class ReceiptWriter {
     private Order order;
     private String fileName;
 
-    public void saveReceipt(Order order) {
-        // generate filename using current date/time (yyyyMMdd-HHmmss.txt)
+    public static void saveReceipt(Order order) {
         String fileName = generateTimestamp() + ".txt";
-        // create a FileWriter and wrap in BufferedWriter (src/main/resources/receipts
 
-        // loop through all order items
         try {
-            FileWriter fileWriter = new FileWriter("receipts/", true );
+            FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             // write to the file
+            bufferedWriter.write("╔═══════════════════════════════════════════════╗\n");
+            bufferedWriter.write("║                                               ║\n");
+            bufferedWriter.write("║         THE KRUSTY KRAB PIZZA PARLOR          ║\n");
+            bufferedWriter.write("║          \"The Pizza for You and Me\"           ║\n");
+            bufferedWriter.write("║                                               ║\n");
+            bufferedWriter.write("╚═══════════════════════════════════════════════╝\n\n");
+
+            bufferedWriter.write("Date: " + generateTimestamp() + "\n");
+            bufferedWriter.write("Order #: " + generateTimestamp() + "\n\n");
+
+            bufferedWriter.write("═══════════════════════════════════════════════\n");
+            bufferedWriter.write("                  ORDER ITEMS                  \n");
+            bufferedWriter.write("═══════════════════════════════════════════════\n\n");
+
+            bufferedWriter.write(order.getOrderSummary());
+
+            // Write total
+            bufferedWriter.write("═══════════════════════════════════════════════\n");
+            bufferedWriter.write(String.format("                TOTAL: $%.2f\n", order.calculateTotal()));
+            bufferedWriter.write("═══════════════════════════════════════════════\n\n");
+
+            // Write footer
+            bufferedWriter.write("        Thank You for Your Order!\n");
+            bufferedWriter.write("      We Hope to See You Again Soon!\n\n");
+            bufferedWriter.write("═══════════════════════════════════════════════\n");
+
+            bufferedWriter.close();
+
+            System.out.println("Receipt saved to: " + fileName);
 
             // close the writer
             bufferedWriter.close();
@@ -32,14 +57,9 @@ public class ReceiptWriter {
             System.out.println("ERROR: An unexpected error occurred");
             e.getStackTrace();
         }
-        //   - write the items to the to reciept
-        //write total cost
-
-        // close BufferedWriter
-        // handle IOException with error message
     }
 
-    private String generateTimestamp() {
+    private static String generateTimestamp() {
         // Create timestamp string useing a formatter
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 

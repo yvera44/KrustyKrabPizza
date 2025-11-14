@@ -1,5 +1,6 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.data.ReceiptWriter;
 import com.pluralsight.model.*;
 
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class UserInterface {
                     break;
                 case "4":
                     runCheckOutMenu(currentOrder);
+                    running = false;
                     break;
                 case "X":
                     System.out.println("Canceling order...");
@@ -186,9 +188,9 @@ public class UserInterface {
                 ║                                               ║
                 ╠═══════════════════════════════════════════════╣
                 ║                                               ║
-                ║               [S] Small 8"                    ║
-                ║               [M] Medium 12"                  ║
-                ║               [L] Large 16"                   ║
+                ║            [S] Small 8"    ($8.50)            ║
+                ║            [M] Medium 12"  ($12.00)           ║
+                ║            [L] Large 16"   ($16.50)           ║
                 ║                                               ║
                 ╚═══════════════════════════════════════════════╝""");
     }
@@ -218,7 +220,7 @@ public class UserInterface {
                     selectFromToppingList(pizza, loadSidesToppings(), "Extras");
                     break;
                 case "X":
-                    runOrderMenu();
+                    running = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -243,17 +245,16 @@ public class UserInterface {
                 ║             [E] Extras                        ║
                 ║             [X] Save & Exit to Main Menu      ║
                 ║                                               ║
-                ╚═══════════════════════════════════════════════╝""");
-    }
+                ╚═══════════════════════════════════════════════╝""");}
 
     private void selectFromToppingList(Pizza pizza, List<Topping> toppings, String catergory) {
         System.out.println("════════════ " + catergory + " ════════════");
 //create own method:
         int index = 1;
         for (Topping topping : toppings) {
-            System.out.println("═════════════════════════════════════════════════════════════════");
-            System.out.println(index + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
-            System.out.println("═════════════════════════════════════════════════════════════════");
+
+            System.out.println("          ["+ index + "]" + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
+            System.out.println("═════════════════════════════════════════════");
             index++;
         }
         System.out.print("Choose a topping or 0 to go back: ");
@@ -298,7 +299,7 @@ public class UserInterface {
         System.out.print("Choose your drink size: ");
         String choice = scanner.nextLine().trim().toUpperCase();
 
-        int size = 0;// normalize input
+        int size = 0;
         switch (choice) {
             case "S":
                 size = 16;
@@ -314,10 +315,11 @@ public class UserInterface {
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
+                return null;
         }
         System.out.println();
-        selectFromDrinkList(size);
-        return null;
+        return selectFromDrinkList(size);
+
     }
 
     private void displayDrinkMenu() {
@@ -328,15 +330,16 @@ public class UserInterface {
                 ║                                               ║
                 ╠═══════════════════════════════════════════════╣
                 ║                                               ║
-                ║             [S] Small 16 oz                   ║
-                ║             [M] Medium 22 oz                  ║
-                ║             [L] Large 30 oz                   ║
-                ║             [X] Back to Order Menu            ║
+                ║          [S] Small 16 oz   ($2.00)            ║
+                ║          [M] Medium 22 oz  ($2.50)            ║
+                ║          [L] Large 30 oz   ($3.00)            ║
+                ║                                               ║
+                ║          [X] Back to Order Menu               ║
                 ║                                               ║
                 ╚═══════════════════════════════════════════════╝""");
     }
 
-    private void selectFromDrinkList(int size) {
+    private Drink selectFromDrinkList(int size) {
         List<String> drinkNames = loadDrinks();
 
         System.out.println("════════════ Available Drinks ════════════");
@@ -350,21 +353,24 @@ public class UserInterface {
         try {
             int choice = Integer.parseInt(scanner.nextLine().trim());
             if (choice == 0) {
-                return;
+                return null;
             }
 
             if (choice > 0 && choice <= drinkNames.size()) {
                 String selectedDrink = drinkNames.get(choice - 1);
                 Drink drink = new Drink(selectedDrink, size, 0, 1);
                 System.out.println("╔══════════════════════════════════════════════════════╗");
-                System.out.println("║     ✓ DRINK ADDED!" + drink);
+                System.out.println("║     ✓ DRINK ADDED! " + drink);
                 System.out.println("╚══════════════════════════════════════════════════════╝");
+
+                return drink;
             } else {
                 System.out.println("Invalid Choice.");
             }
         } catch (NumberFormatException e) {
             System.out.println("Please enter a valid number.");
         }
+        return null;
     }
 
     public void runCheckOutMenu(Order order) {
@@ -379,13 +385,14 @@ public class UserInterface {
 
             switch (choice) {
                 case "Y":
-                    System.out.println();
-                    break;
-                case "N":
+                    completeOrder(order);
+                    System.out.println("\n Ordered confirmed! Thank you for dining at the Krusty Krab Pizza Parlor!");
                     running = false;
                     break;
-                case "S":
-                    System.out.println();
+                case "N":
+                    System.out.println("\n Ordered cancelled. Returning to Order Menu...");
+                    running = false;
+                    break;
                 default:
                     System.out.println("Invalid input... Please try again. ");
             }
@@ -398,9 +405,9 @@ public class UserInterface {
                 ╔═══════════════════════════════════════════════╗
                 ║                                               ║
                 ║                   CHECKOUT                    ║
-                ║           Please confirm your order.          ║
+                ║           Please confirm your order:          ║
                 ║                                               ║
-                ╠═══════════════════════════════════════════════╣""");
+                ╚═══════════════════════════════════════════════╝""");
 
         // Display Pizzas
         if (!order.getPizzas().isEmpty()) {
@@ -431,20 +438,32 @@ public class UserInterface {
 
         // Display Total
         double total = order.calculateTotal();
-        System.out.println("═══════════════════════════════════════════════");
+        System.out.println("═════════════════════════════════════");
         System.out.printf("TOTAL: $%.2f\n", total);
-        System.out.println("═══════════════════════════════════════════════");
+        System.out.println("═════════════════════════════════════");
 
-        System.out.println("""
-            
+        System.out.println("""           
             ╔═══════════════════════════════════════════════╗
-            ║        [Y] Confirm Order                      ║
-            ║        [N] Cancel Order                       ║
+            ║              [Y] Confirm Order                ║
+            ║              [N] Cancel Order                 ║
             ╚═══════════════════════════════════════════════╝
             """);
     }
+    private void completeOrder(Order order) {
+        System.out.println("\nFinal Order Summary:");
+        System.out.println(order.getOrderSummary());
+        ReceiptWriter.saveReceipt(order);
+        System.out.println(" Receipt saved successfully!");
+    }
 
-        public List<Topping> loadRegularToppings () {
+    private void showOrderSummary(Order order, Scanner scanner) {
+        System.out.println("\n" + order.getOrderSummary());
+
+        scanner.close();
+    }
+
+
+    public List<Topping> loadRegularToppings () {
             List<Topping> regularToppings = new ArrayList<>();
 
             Topping onions = new Topping("Onions", "Vegetable", false, 0);
