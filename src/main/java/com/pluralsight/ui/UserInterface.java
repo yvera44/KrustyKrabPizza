@@ -27,7 +27,7 @@ public class UserInterface {
                     runOrderMenu();
                     break;
                 case "0":
-                    System.out.println("Exiting... Uhm maybe order something next time!?");
+                    System.out.println("Exiting... Thank you!");
                     running = false;
                     break;
                 default:
