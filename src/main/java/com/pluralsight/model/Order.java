@@ -58,7 +58,8 @@ public class Order {
     }
 
     public String getOrderSummary() {
-        StringBuilder summary = new StringBuilder(Colors.YELLOW + "═══════════ Order Summary ═══════════\n");
+        System.out.println(Colors.RESET);
+        StringBuilder summary = new StringBuilder("═════════════════ Order Summary ═════════════════\n");
 
         if (!pizzas.isEmpty()) {
             summary.append("\nPizzas:\n");
@@ -77,9 +78,7 @@ public class Order {
             garlicKnots.stream()
                     .forEach(garlicKnots -> summary.append(" - ").append(garlicKnots).append("\n"));
         }
-
-        summary.append("\nTotal: $").append(String.format("%.2f", calculateTotal())).append("\n");
-        summary.append(Colors.YELLOW + "═════════════════════════════════");
+        summary.append("------------------------------------------------\n");
 
         return summary.toString();
     }

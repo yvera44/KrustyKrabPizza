@@ -32,21 +32,18 @@ public class ReceiptWriter {
             bufferedWriter.write("Date: " + generateTimestamp() + "\n");
             bufferedWriter.write("Order #: " + generateTimestamp() + "\n\n");
 
-            bufferedWriter.write("═══════════════════════════════════════════════\n");
-            bufferedWriter.write("                  ORDER ITEMS                  \n");
-            bufferedWriter.write("═══════════════════════════════════════════════\n\n");
+            bufferedWriter.write("═════════════════════════════════════════════════\n");
+            bufferedWriter.write("                    ORDER ITEMS                  \n");
+            bufferedWriter.write("═════════════════════════════════════════════════\n");
 
             bufferedWriter.write(order.getOrderSummary());
 
+            bufferedWriter.write(String.format("%15s\n", String.format("TOTAL: $%.2f\n", order.calculateTotal())));
+            bufferedWriter.write("-------------------------------------------------\n");
 
-            bufferedWriter.write("══════════════\n");
-            bufferedWriter.write(String.format("%15s\n", String.format("TOTAL: $%.2f", order.calculateTotal())));
-            //bufferedWriter.write("═══════════════════════════════════════════════\n\n");
-
-
-            bufferedWriter.write("        Thank You for Your Order!\n");
-            bufferedWriter.write("      We Hope to See You Again Soon!\n\n");
-            bufferedWriter.write("═══════════════════════════════════════════════\n");
+            bufferedWriter.write("          Thank You for Your Order!\n");
+            bufferedWriter.write("        We Hope to See You Again Soon!\n");
+            bufferedWriter.write("═════════════════════════════════════════════════\n");
 
             bufferedWriter.close();
             System.out.println("Receipt saved to: " + fileName);

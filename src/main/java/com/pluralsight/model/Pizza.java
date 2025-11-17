@@ -46,7 +46,7 @@ public class Pizza extends MenuItem {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(size).append("\" ").append(crust).append(" crust pizza");
+        sb.append(size).append("\" ").append(crust).append(" crust pizza\n");
 
         if (!toppings.isEmpty()) {
             sb.append(" with: ");
@@ -56,7 +56,7 @@ public class Pizza extends MenuItem {
                     sb.append(" (extra)");
                 }
                 if (i < toppings.size() - 1) {
-                    sb.append(", ");
+                    sb.append("\n ");
                 }
             }
         }

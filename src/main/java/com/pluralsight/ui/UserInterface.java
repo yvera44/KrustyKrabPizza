@@ -13,11 +13,13 @@ public class UserInterface {
     // Main menu loop
     public void runMainMenu() {
         boolean running = true;
-        System.out.println("WELCOME TO THE KRUSTY KRAB PIZZA PARLOR ");
+        System.out.println("═════════════════════════════════════════════════");
+        System.out.println(Colors.BOLD_BRIGHT_YELLOW + "     WELCOME TO THE KRUSTY KRAB PIZZA PARLOR " + Colors.RESET);
+        System.out.println("═════════════════════════════════════════════════");
 
         while (running) {
             displayMenu();
-            System.out.print("Choose and option: ");
+            System.out.print(Colors.GREEN + "Choose and option: ");
             String choice = scanner.nextLine().trim().toUpperCase();
 
             switch (choice) {
@@ -40,15 +42,11 @@ public class UserInterface {
     private void displayMenu() {
         System.out.println(Colors.YELLOW + """
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║         THE KRUSTY KRAB PIZZA PARLOR          ║
                 ║          "The Pizza for You and Me"           ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║                [1] New Order                  ║
                 ║                [0] Exit                       ║
-                ║                                               ║
                 ╚═══════════════════════════════════════════════╝""");
 
     }
@@ -96,17 +94,13 @@ public class UserInterface {
     private void displayItemMenu() {
         System.out.println(Colors.BLUE + """
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                   ITEM MENU                   ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║             [1] Add Pizza                     ║
                 ║             [2] Add Drink                     ║
                 ║             [3] Add Garlic Knots              ║
                 ║             [4] Checkout                      ║
                 ║             [X] Cancel Order                  ║
-                ║                                               ║
                 ╚═══════════════════════════════════════════════╝""" + Colors.RESET);
     }
 
@@ -141,17 +135,14 @@ public class UserInterface {
     private void displayCrustMenu() {
         System.out.println(Colors.YELLOW + """
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                  KRUST TYPES                  ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║              [1] Thin                         ║
                 ║              [2] Regular                      ║
                 ║              [3] Thick                        ║
                 ║              [4] Cauliflower                  ║
-                ║              [X] Cancel Order                 ║
                 ║                                               ║
+                ║              [X] Cancel Order                 ║
                 ╚═══════════════════════════════════════════════╝""" + Colors.RESET);
     }
 
@@ -186,15 +177,11 @@ public class UserInterface {
     private void displayPizzaSizes() {
         System.out.println(Colors.BLUE + """
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                  PIZZA SIZES                  ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║            [S] Small 8"    ($8.50)            ║
                 ║            [M] Medium 12"  ($12.00)           ║
                 ║            [L] Large 16"   ($16.50)           ║
-                ║                                               ║
                 ╚═══════════════════════════════════════════════╝"""+ Colors.RESET);
     }
 
@@ -236,29 +223,30 @@ public class UserInterface {
     private void displayToppingsMenu() {
         System.out.println(Colors.YELLOW + """               
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                    TOPPINGS                   ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║             [R] Regular Toppings              ║
                 ║             [M] Meats                         ║
                 ║             [C] Cheeses                       ║
                 ║             [S] Sauces                        ║
                 ║             [E] Extras                        ║
-                ║             [X] Save & Exit to Main Menu      ║
                 ║                                               ║
+                ║             [X] Save & Exit to Main Menu      ║
                 ╚═══════════════════════════════════════════════╝""");}
 
     private void selectFromToppingList(Pizza pizza, List<Topping> toppings, String catergory) {
-        System.out.println(Colors.PURPLE + "════════════ " + catergory + " ════════════");
+        System.out.println(Colors.CYAN + "┌─────────────────────────────────────────┐");
+        System.out.println(Colors.CYAN + "│            " + Colors.RESET + catergory );
+        System.out.println(Colors.CYAN + "└─────────────────────────────────────────┘");
 //create own method:
         int index = 1;
+        System.out.println(Colors.MAGENTA + "╔═════════════════════════════════════════╗");
         for (Topping topping : toppings) {
 
-            System.out.println("          ["+ index + "]" + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
+            System.out.println(Colors.RESET + "   ["+ index + "]" + " " + topping.getToppingName() + " - $" + topping.calculateFinalToppingPrice(pizza.getSize()));
             index++;
         }
+        System.out.println(Colors.MAGENTA + "╚═════════════════════════════════════════╝"+ Colors.RESET);
         System.out.print("Choose a topping or 0 to go back: ");
 
         try {
@@ -280,13 +268,12 @@ public class UserInterface {
                 } else {
                     pizza.addTopping(selectedTopping);
                 }
-                System.out.println(Colors.PURPLE + "╔════════════════════════════════════╗");
-                System.out.println(Colors.PURPLE + "║          ✓ TOPPING ADDED!           ");
-                System.out.println(Colors.PURPLE + "║             " + selectedTopping.getToppingName());
-                System.out.println(Colors.PURPLE + "╚════════════════════════════════════╝");
                 selectedTopping.calculateFinalToppingPrice(pizza.getSize());
+                String selectedToppingPrint = selectedTopping.getToppingName() + " $" + (selectedTopping.calculateFinalToppingPrice(pizza.getSize()));
+                System.out.println(Colors.MAGENTA + "╔══════════════════════════════════════════╗");
+                System.out.println(Colors.MAGENTA + "║" + Colors.RESET + "    ✓ TOPPING ADDED! " + selectedToppingPrint);
+                System.out.println(Colors.MAGENTA + "╚══════════════════════════════════════════╝" + Colors.RESET);
 
-                System.out.println(selectedTopping.calculateFinalToppingPrice(pizza.getSize()));
             } else {
                 System.out.println("Invalid choice.");
             }
@@ -327,29 +314,29 @@ public class UserInterface {
     private void displayDrinkMenu() {
         System.out.println(Colors.YELLOW+ """              
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                    DRINKS                     ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║          [S] Small 16 oz   ($2.00)            ║
                 ║          [M] Medium 22 oz  ($2.50)            ║
                 ║          [L] Large 30 oz   ($3.00)            ║
                 ║                                               ║
                 ║          [X] Back to Order Menu               ║
-                ║                                               ║
-                ╚═══════════════════════════════════════════════╝""");
+                ╚═══════════════════════════════════════════════╝""" + Colors.RESET);
     }
 
     private Drink selectFromDrinkList(int size) {
         List<String> drinkNames = loadDrinks();
+        System.out.println(Colors.CYAN + "┌─────────────────────────────────────────┐");
+        System.out.println(Colors.CYAN + "│" + Colors.RESET + "            Available Drinks");
+        System.out.println(Colors.CYAN + "└─────────────────────────────────────────┘");
 
-        System.out.println(Colors.CYAN + "════════════ Available Drinks ════════════");
         int index = 1;
+        System.out.println(Colors.MAGENTA + "╔═════════════════════════════════════════╗");
         for (String drinkName : drinkNames) {
-            System.out.println("          ["+ index + "]"  + " " + drinkName);
+            System.out.println(Colors.RESET + "  ["+ index + "]"  + " " + drinkName);
             index++;
         }
+        System.out.println(Colors.MAGENTA + "╚═════════════════════════════════════════╝");
         System.out.print("Choose a Drink: ");
 
         try {
@@ -361,9 +348,9 @@ public class UserInterface {
             if (choice > 0 && choice <= drinkNames.size()) {
                 String selectedDrink = drinkNames.get(choice - 1);
                 Drink drink = new Drink(selectedDrink, size, 0, 1);
-                System.out.println(Colors.WHITE + "╔══════════════════════════════════════════════════════╗");
-                System.out.println(Colors.WHITE + "║     ✓ DRINK ADDED! " + drink);
-                System.out.println(Colors.WHITE + "╚══════════════════════════════════════════════════════╝");
+                System.out.println(Colors.MAGENTA + "╔══════════════════════════════════════════════════════╗");
+                System.out.println(Colors.MAGENTA + "║" + Colors.RESET + "     ✓ DRINK ADDED! " + drink);
+                System.out.println(Colors.MAGENTA + "╚══════════════════════════════════════════════════════╝" + Colors.RESET);
 
                 return drink;
             } else {
@@ -403,28 +390,24 @@ public class UserInterface {
 
         GarlicKnots garlicKnots = new GarlicKnots(0, quantity, "Garlic Knots");
 
-        System.out.println(Colors.BLUE + "╔══════════════════════════════════════════════════════════╗");
-        System.out.println(Colors.BLUE + "║       GARLIC KNOTS ADDED! " + garlicKnots);
-        System.out.println(Colors.BLUE + "╚══════════════════════════════════════════════════════════╝");
+        System.out.println(Colors.BLUE + "╔══════════════════════════════════════════════════════╗");
+        System.out.println(Colors.BLUE + "║" +Colors.RESET + "   GARLIC KNOTS ADDED! " + garlicKnots);
+        System.out.println(Colors.BLUE + "╚══════════════════════════════════════════════════════╝" + Colors.RESET);
 
         return garlicKnots;
     }
 
     private void displayGarlicKnotsMenu() {
-        System.out.println(Colors.BLUE + """
+        System.out.println(Colors.YELLOW + """
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                 GARLIC KNOTS                  ║
-                ║                                               ║
                 ╠═══════════════════════════════════════════════╣
-                ║                                               ║
                 ║       [S] 3 Piece Garlic Knots  ($4.00)       ║
                 ║       [M] 5 Piece Garlic Knots  ($5.50)       ║
                 ║       [L] 8 Piece Garlic Knots  ($7.00)       ║
                 ║                                               ║
                 ║            [X] Back to Order Menu             ║
-                ║                                               ║
-                ╚═══════════════════════════════════════════════╝""");
+                ╚═══════════════════════════════════════════════╝"""+ Colors.RESET);
     }
 
     public void runCheckOutMenu(Order order) {
@@ -440,7 +423,9 @@ public class UserInterface {
             switch (choice) {
                 case "Y":
                     completeOrder(order);
-                    System.out.println("\n Ordered confirmed! Thank you for dining at the Krusty Krab Pizza Parlor!");
+                    System.out.println("                 Order confirmed!");
+                    System.out.println("Thanks for dining at the Krusty Krab Pizza Parlor!");
+                    System.out.println("-----------------------------------------------");
                     running = false;
                     break;
                 case "N":
@@ -457,11 +442,9 @@ public class UserInterface {
     private void displayCheckOutMenu(Order order) {
         System.out.println(Colors.YELLOW + """
                 ╔═══════════════════════════════════════════════╗
-                ║                                               ║
                 ║                   CHECKOUT                    ║
                 ║           Please confirm your order:          ║
-                ║                                               ║
-                ╚═══════════════════════════════════════════════╝""");
+                ╚═══════════════════════════════════════════════╝""" + Colors.RESET);
 
         // Display Pizzas
         if (!order.getPizzas().isEmpty()) {
@@ -496,7 +479,7 @@ public class UserInterface {
         System.out.printf("TOTAL: $%.2f\n", total);
         System.out.println("═════════════════════════════════════");
 
-        System.out.println(Colors.YELLOW + """           
+        System.out.println(Colors.RESET + """           
             ╔═══════════════════════════════════════════════╗
             ║              [Y] Confirm Order                ║
             ║              [N] Cancel Order                 ║
@@ -505,10 +488,10 @@ public class UserInterface {
     }
 
     private void completeOrder(Order order) {
-        System.out.println("\nFinal Order Summary:");
         System.out.println(order.getOrderSummary());
         ReceiptWriter.saveReceipt(order);
-        System.out.println(" Receipt saved successfully!");
+        System.out.println("Receipt saved successfully!");
+        System.out.println("-----------------------------------------------");
     }
 
     private void showOrderSummary(Order order, Scanner scanner) {
