@@ -118,7 +118,7 @@ public class UserInterface {
                 crust = "Thin";
                 break;
             case "3":
-                crust = "Think";
+                crust = "Thick";
                 break;
             case "4":
                 crust = "Cauliflower";
